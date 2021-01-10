@@ -41,7 +41,7 @@ class EmployeesController extends Controller
         if (!empty($search)) {
             $data = DB::table('m_employees as e')
                 ->where(function ($query) use ($search) {
-                    $query->where('a.nik', 'LIKE', "%" . $search . "%");
+                    $query->where('e.nik', 'LIKE', "%" . $search . "%");
 
                 })
                 ->offset($start)
@@ -49,13 +49,11 @@ class EmployeesController extends Controller
                 ->get();
             $total_filter = DB::table('m_employees as e')
                 ->where(function ($query) use ($search) {
-                    $query->where('a.nik', 'LIKE', "%" . $search . "%");
-
+                    $query->where('e.nik', 'LIKE', "%" . $search . "%");
                 })
                 ->offset($start)
                 ->limit($limit)
                 ->count();
-
         }
 
         $no = 1+$start;
